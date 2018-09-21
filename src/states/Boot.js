@@ -8,20 +8,22 @@ export default class extends Phaser.State
 
     this.input.maxPointers = 2;
 
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+
     this.stage.disableVisibilityChange = true;
 
     if (this.game.device.desktop)
     {
-      this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       this.scale.setMinMax(gameOptions.main.width, gameOptions.main.height, gameOptions.main.width, gameOptions.main.height);
     }
     else
     {
-      this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-
       this.scale.forceOrientation(true);
       this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
       this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
+
+      this.orientationImg = null;
     }
 
     this.scale.pageAlignHorizontally = true;
@@ -42,13 +44,16 @@ export default class extends Phaser.State
 
   enterIncorrectOrientation ()
   {
-    document.getElementById('orientation').style.display = 'block';
+    this.orientationImg = this.game.add.image( 0, 0, 'orientationImg');
+    this.orientationImg.fixedToCamera = true;
+    this.orientationImg.width = gameOptions.main.width;
+    this.orientationImg.height = gameOptions.main.height;
     this.game.paused = true;
   }
 
   leaveIncorrectOrientation ()
   {
-    document.getElementById('orientation').style.display = 'none';
+    this.orientationImg.destroy();
     this.game.paused = false;
   }
 

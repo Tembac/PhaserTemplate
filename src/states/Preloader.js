@@ -16,6 +16,10 @@ export default class extends Phaser.State
 
     this.load.image('birdImg', 'assets/images/bird.png');
 
+    this.load.image("orientationImg", "assets/images/orientation.jpg");
+
+    this.load.spritesheet('btnSheet', 'assets/images/button.png', 320, 80);
+
   }
 
   create ()
@@ -27,11 +31,12 @@ export default class extends Phaser.State
 
     if(indexInfo.buildState == "Debug")
     {
-      this.state.start('PlayState');
+      // this.state.start('PlayState');
+      this.state.start('MainMenu');
     }
     else
     {
-      this.state.start('PlayState');
+      this.state.start('MainMenu');
     }
   }
 }

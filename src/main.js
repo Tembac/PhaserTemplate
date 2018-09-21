@@ -1,5 +1,6 @@
 import BootState from './states/Boot';
 import PlayState from './states/PlayState';
+import MainMenu from './states/MainMenu';
 import Preloader from './states/Preloader';
 import gameOptions from "./gameOptions"
 
@@ -11,6 +12,7 @@ window.onload = function() {
   // adding game state
   game.state.add("Boot", BootState);
   game.state.add("Preloader", Preloader);
+  game.state.add("MainMenu", MainMenu);
   game.state.add("PlayState", PlayState);
 
   // starting game state
