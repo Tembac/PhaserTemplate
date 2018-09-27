@@ -35,6 +35,7 @@ export default class extends Phaser.State
   {
     this.load.image('preloaderBarBack', 'assets/images/preloaderEmpty.png');
     this.load.image('preloaderBar', 'assets/images/preloaderFull.png');
+    this.load.image("orientationImg", "assets/images/orientation.jpg");
   }
 
   create ()
@@ -44,17 +45,26 @@ export default class extends Phaser.State
 
   enterIncorrectOrientation ()
   {
-    this.orientationImg = this.game.add.image( 0, 0, 'orientationImg');
-    this.orientationImg.fixedToCamera = true;
-    this.orientationImg.width = gameOptions.main.width;
-    this.orientationImg.height = gameOptions.main.height;
+    console.log("enter incorrect orientation.");
+    document.getElementById('orientation').style.display = 'block';
+    this.showOrientationImage();
     this.game.paused = true;
   }
 
   leaveIncorrectOrientation ()
   {
+    console.log("leave incorrect orientation.");
+    document.getElementById('orientation').style.display = 'none';
     this.orientationImg.destroy();
     this.game.paused = false;
+  }
+
+  showOrientationImage(){
+    console.log("show image");
+    this.orientationImg = this.game.add.image( 0, 0, 'orientationImg');
+    this.orientationImg.fixedToCamera = true;
+    this.orientationImg.width = gameOptions.main.width;
+    this.orientationImg.height = gameOptions.main.height;
   }
 
 }
